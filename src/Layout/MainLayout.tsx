@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 // component import
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
 const APP_BAR_MOBILE = 64;

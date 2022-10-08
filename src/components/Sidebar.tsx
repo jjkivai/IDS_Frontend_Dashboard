@@ -15,10 +15,15 @@ import Iconify from "./Iconify";
 
 const DRAWER_WIDTH = 280;
 
-const RootStyle = styled("div")(({ theme }) => ({
+const RootStyle = styled("header")(({ theme }) => ({
+    height: "96px",
+    width: "100%",
+    position: "absolute",
+    backgroundColor: "transparent",
+    top: 0,
+    zIndex: 500,
     [theme.breakpoints.up("lg")]: {
         flexShrink: 0,
-        width: DRAWER_WIDTH,
     },
 }));
 
@@ -47,6 +52,19 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
             <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
                 <Logo />
             </Box>
+            <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
+                <IconButton
+                    onClick={onCloseSidebar}
+                    sx={{
+                        color: "green",
+                        position: "fixed",
+                        right: "38px",
+                        top: "24px",
+                    }}
+                >
+                    <Iconify icon="ep:close-bold" />
+                </IconButton>
+            </Box>
 
             <NavSection navConfig={navRoutes} />
             <Box sx={{ flexGrow: 1 }} />
@@ -54,13 +72,23 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
     );
     return (
         <RootStyle>
-            <IconButton onClick={onOpenSidebar} sx={{ ml: 1, mt: 1, color: "text.primary", display: {} }}>
-                <Iconify icon="eva:menu-2-fill" />
+            <IconButton
+                onClick={onOpenSidebar}
+                sx={{
+                    color: "green",
+                    position: "fixed",
+                    right: "38px",
+                    top: "24px",
+                    backgroundColor: "rgba(99, 115, 129, 0.2)",
+                }}
+            >
+                <Iconify icon="eva:menu-2-fill" sx={{ fontSize: "40px" }} />
             </IconButton>
 
             <Drawer
                 open={isOpenSidebar}
                 onClose={onCloseSidebar}
+                anchor="right"
                 PaperProps={{
                     sx: { width: DRAWER_WIDTH },
                 }}
@@ -70,3 +98,4 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
         </RootStyle>
     );
 }
+/**mr: 1, color: "text.primary", display: {}  */

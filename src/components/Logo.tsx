@@ -3,7 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
-import IDSLogo from "../static/logo.png";
+import IDSLogo from "../static/logo2.png";
 
 type LogoPropType = {
     disabledLink?: boolean;
