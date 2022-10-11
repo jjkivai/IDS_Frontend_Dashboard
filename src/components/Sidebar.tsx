@@ -72,6 +72,17 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
     );
     return (
         <RootStyle>
+            <Box
+                sx={{
+                    left: "50px",
+                    position: "absolute",
+                    top: "24px",
+                    display: "inline-flex",
+                    zIndex: 501,
+                }}
+            >
+                <Logo sx={{ width: 50, height: 50 }} />
+            </Box>
             <IconButton
                 onClick={onOpenSidebar}
                 sx={{

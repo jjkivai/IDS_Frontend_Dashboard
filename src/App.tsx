@@ -3,6 +3,8 @@ import React from "react";
 import Router from "./routes";
 //theme
 import ThemeProvider from "./theme";
+// custom css
+import "./App.css";
 
 function App() {
     return (
