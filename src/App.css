@@ -1,4 +1,7 @@
-html {
+@import "./static/css/base.css";
+@import "./static/css/vendor.css";
+@import "./static/css/main.css";
+/* html {
     height: 100%;
     font-size: 10px;
     box-sizing: border-box;
@@ -23,4 +26,4 @@ body {
     padding: 0;
     word-wrap: break-word;
     text-rendering: optimizeLegibility;
-}
+} */

@@ -15,17 +15,7 @@ import Iconify from "./Iconify";
 
 const DRAWER_WIDTH = 280;
 
-const RootStyle = styled("header")(({ theme }) => ({
-    height: "96px",
-    width: "100%",
-    position: "absolute",
-    backgroundColor: "transparent",
-    top: 0,
-    zIndex: 500,
-    [theme.breakpoints.up("lg")]: {
-        flexShrink: 0,
-    },
-}));
+const Header = styled("header")(({ theme }) => ({}));
 
 type SidebarPropTypes = {
     isOpenSidebar: boolean;
@@ -52,7 +42,7 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
             <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
                 <Logo />
             </Box>
-            <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
+            <Box sx={{ display: "inline-flex" }}>
                 <IconButton
                     onClick={onCloseSidebar}
                     sx={{
@@ -60,6 +50,12 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
                         position: "fixed",
                         right: "38px",
                         top: "24px",
+                        width: 40,
+                        height: 40,
+                        ":hover": {
+                            backgroundColor: "rgba(99, 115, 129, 0.2)",
+                            color: "green",
+                        },
                     }}
                 >
                     <Iconify icon="ep:close-bold" />
@@ -71,16 +67,8 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
         </Scrollbar>
     );
     return (
-        <RootStyle>
-            <Box
-                sx={{
-                    left: "50px",
-                    position: "absolute",
-                    top: "24px",
-                    display: "inline-flex",
-                    zIndex: 501,
-                }}
-            >
+        <Header className="s-header">
+            <Box className="header-logo">
                 <Logo sx={{ width: 50, height: 50 }} />
             </Box>
             <IconButton
@@ -101,12 +89,12 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar, onOpenSidebar }
                 onClose={onCloseSidebar}
                 anchor="right"
                 PaperProps={{
-                    sx: { width: DRAWER_WIDTH },
+                    sx: { width: DRAWER_WIDTH, backgroundColor: "#0c0c0c" },
                 }}
             >
                 {renderContent}
             </Drawer>
-        </RootStyle>
+        </Header>
     );
 }
 /**mr: 1, color: "text.primary", display: {}  */

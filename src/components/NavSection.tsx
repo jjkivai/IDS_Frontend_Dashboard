@@ -1,5 +1,4 @@
 import React, { ReactNode, useState } from "react";
-import PropTypes from "prop-types";
 import { NavLink as RouterLink, matchPath, useLocation } from "react-router-dom";
 // material
 import { alpha, useTheme, styled } from "@mui/material/styles";
@@ -156,7 +155,8 @@ export default function NavSection({ navConfig, ...other }: NavSectionPropTypes)
 
     return (
         <Box {...other}>
-            <List disablePadding sx={{ p: 1 }}>
+            {/**className="header-nav__content" not needed */}
+            <List disablePadding sx={{ p: 1 }} className="header-nav__list">
                 {navConfig.map((item: NavItemType) => (
                     <NavItem key={item.title} item={item} active={match} />
                 ))}
