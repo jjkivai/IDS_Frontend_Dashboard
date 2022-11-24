@@ -1,0 +1,24 @@
+{
+    "minify": true,
+    "options": ["setClasses"],
+    "feature-detects": [
+        "test/audio",
+        "test/canvas",
+        "test/svg",
+        "test/touchevents",
+        "test/video",
+        "test/css/animations",
+        "test/css/backgroundblendmode",
+        "test/css/calc",
+        "test/css/filters",
+        "test/css/flexbox",
+        "test/css/flexboxlegacy",
+        "test/css/flexboxtweener",
+        "test/css/flexwrap",
+        "test/css/gradients",
+        "test/css/remunit",
+        "test/css/transforms",
+        "test/css/transforms3d",
+        "test/css/transitions"
+    ]
+}

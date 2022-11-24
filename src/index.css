@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    font-weight: normal;
+    line-height: 1;
+    word-wrap: break-word;
+    text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
