@@ -11,7 +11,7 @@ import navRoutes from "./NavRoutes";
 
 const DRAWER_WIDTH = 280;
 
-const HeaderNav = styled(Box)(({ theme }) => ({
+const HeaderNav = styled(Box)({
     background: "#0c0c0c",
     color: "rgba(255, 255, 255, 0.25)",
     fontFamily: '"montserrat-light", sans-serif',
@@ -23,7 +23,7 @@ const HeaderNav = styled(Box)(({ theme }) => ({
     "& p": {
         marginBottom: "2.7rem",
     },
-}));
+});
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);

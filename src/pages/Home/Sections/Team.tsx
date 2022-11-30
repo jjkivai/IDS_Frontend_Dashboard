@@ -1,66 +1,76 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import $ from "jquery";
+import axios from "axios";
 /* eslint-disable */
 const initialData: Member[] = [
     {
-        name: "Sayra",
+        name: "Sayra Gorgani",
         position: "Founder",
         image: require("../../../static/images/avatars/person5.png"),
     },
     {
-        name: "Ashwin",
-        position: "Founder",
+        name: "Ashwin Ramesh",
+        position: "Co-Founder",
+        image: require("../../../static/images/avatars/person7.png"),
+    },
+    {
+        name: "Eric Laksmono",
+        position: "Co-Founder",
         image: require("../../../static/images/avatars/person5.png"),
     },
     {
-        name: "Eric",
-        position: "Founder",
-        image: require("../../../static/images/avatars/person5.png"),
-    },
-    {
-        name: "Alexis",
-        position: "Founder",
-        image: require("../../../static/images/avatars/person5.png"),
-    },
-    {
-        name: "Prachi",
-        position: "Founder",
-        image: require("../../../static/images/avatars/person5.png"),
+        name: "Alexis Guidi",
+        position: "Co-Founder",
+        image: require("../../../static/images/avatars/person3.png"),
     },
 ];
 export default function Team() {
+    const [members, setMembers] = useState<Member[]>([]);
     useLayoutEffect(() => {
-        /* eslint-disable */
-
-        $(".team")
-            .not(".slick-initialized")
-            .slick({
-                arrows: true,
-                dots: false,
-                infinite: true,
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                adaptiveHeight: true,
-                pauseOnFocus: false,
-                autoplaySpeed: 1500,
-                responsive: [
-                    {
-                        breakpoint: 900,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
+        if (members.length > 0) {
+            $(".team")
+                .not(".slick-initialized")
+                .slick({
+                    arrows: true,
+                    dots: false,
+                    infinite: true,
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    adaptiveHeight: true,
+                    pauseOnFocus: false,
+                    autoplaySpeed: 1500,
+                    responsive: [
+                        {
+                            breakpoint: 900,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                            },
                         },
-                    },
-                    {
-                        breakpoint: 800,
-                        settings: {
-                            arrows: false,
-                            dots: true,
+                        {
+                            breakpoint: 800,
+                            settings: {
+                                arrows: false,
+                                dots: true,
+                            },
                         },
-                    },
-                ],
-            });
+                    ],
+                });
+        }
     });
-    const [members, setMembers] = useState<Member[]>(initialData);
+    useEffect(() => {
+        axios
+            .get<Member[]>("people")
+            .then((res) => res.data)
+            .then((data) => {
+                setMembers(data);
+            })
+            .catch((error) => {
+                console.error(error);
+
+                setMembers(initialData);
+            });
+    }, []);
     return (
         <section id="team" className="s-clients">
             <div className="row section-header" data-aos="fade-up">

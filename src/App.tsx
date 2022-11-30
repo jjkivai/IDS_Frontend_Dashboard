@@ -13,6 +13,7 @@ import "./App.css";
 import ThemeProvider from "./Theme";
 // Paralla
 declare global {
+    // eslint-disable-next-line
     interface Window {
         jQuery: JQueryStatic;
         $: JQueryStatic;
@@ -54,13 +55,13 @@ function App() {
         <PreLoader loaderRef={loaderRef} preLoaderRef={preLoaderRef} />
     ) : (
         <ThemeProvider>
-            <Router />
             <Helmet>
                 {/* <script src="/js/parallax.min.js" async />
                 <script src="/js/waypoints.min.js" async /> */}
                 <script src="/js/libraries.js" />
                 <script src="/js/external.js" />
             </Helmet>
+            <Router />
         </ThemeProvider>
     );
 }

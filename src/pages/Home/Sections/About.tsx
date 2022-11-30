@@ -1,6 +1,7 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import $ from "jquery";
 import { Waypoint } from "react-waypoint";
+import axios from "axios";
 
 type AboutData = {
     members: number;
@@ -8,18 +9,26 @@ type AboutData = {
     faculty: number;
     meetingsDone: number;
 };
+const fakeData: AboutData = { members: 102, partners: 4, faculty: 3, meetingsDone: 46 };
 
 export default function About() {
     const ref = useRef<HTMLDivElement>(null);
     const [hasCounted, sethasCounted] = useState(false);
-    const [data, setData] = useState<AboutData>({ members: 0, partners: 0, faculty: 0, meetingsDone: 0 });
-    useLayoutEffect(() => {
-        setTimeout(() => {
-            setData({ members: 102, partners: 4, faculty: 3, meetingsDone: 46 });
-        }, 500);
-    }, [data]);
-    // TODO: ADD API CALL FOR THE NUMBERSSSSSSSSS
+    const [data, setData] = useState<AboutData>(fakeData);
+    useEffect(() => {
+        axios
+            .get<AboutData[]>("about")
+            .then((res) => res.data)
+            .then((data) => {
+                setData(data[0]);
+            })
+            .catch((err) => {
+                console.log(err);
+                setData(fakeData);
+            });
+    }, []);
     // use this unless other counts are needed
+    // eslint-disable-next-line
     const countNumbers = (_args: Waypoint.CallbackArgs) => {
         Array.from(ref.current?.getElementsByClassName("stats__count")!).forEach((element) => {
             const $this = $(element);

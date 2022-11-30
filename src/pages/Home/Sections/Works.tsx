@@ -1,6 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 // import * as Masonry from "masonry-layout";
-// import * as ImagesLoaded from "imagesloaded";
+import "imagesloaded";
 // import * as Parallax from "jquery-parallax.js"
 
 /* eslint-disable */
@@ -17,7 +18,7 @@ const fakeData: Project[] = [
     {
         title: "Solar Bench Project",
         link: "/solar_bench",
-        image: require("../../../static/images/portfolio/gallery/solar_bench.png"),
+        image: "../../../static/images/portfolio/gallery/solar_bench.png",
         docLink:
             "https://docs.google.com/presentation/d/1SNtXMcVFSYvDvYd1gbPlbcELS1MevdR-yTPqgnv6i48/edit#slide=id.g35f391192_00",
         description: "Implementing Solar Benches on Campus",
@@ -30,33 +31,31 @@ const fakeData: Project[] = [
     {
         title: "Campus Waste Initiaive",
         link: "/cwi",
-        image: require("../../../static/images/portfolio/gallery/cwi.png"),
+        image: "../../../static/images/portfolio/gallery/cwi.png",
         description: "Waste Management around University Campus",
     },
     {
         title: "Solar Decathelon",
-        link: "#TO_SOLAR_DECATHELON",
-        image: require("../../../static/images/portfolio/gallery/cwi.png"),
-        description: "The solar decathelon competition",
-    },
-    {
-        title: "Solar Decathelon3",
-        link: "#TO_SOLAR_DECATHELON",
-        image: require("../../../static/images/portfolio/gallery/solar_bench.png"),
+        link: "https://www.solardecathlon.gov/",
+        image: "../../../static/images/portfolio/gallery/sd.jpg",
         description: "The solar decathelon competition",
     },
 ];
 
 export default function Works() {
-    // useLayoutEffect(() => {
-    //     const msnry = new Masonry(".masonry", {
-    //         // options...
-    //         itemSelector: ".masonry__brick",
-    //         resize: true,
-    //     });
-    // });
-    const [data, setData] = useState<Project[]>(fakeData);
-
+    const [data, setData] = useState<Project[]>([]);
+    useEffect(() => {
+        axios
+            .get<Project[]>("project")
+            .then((res) => res.data)
+            .then((data) => {
+                setData(data);
+            })
+            .catch((error) => {
+                console.error(error);
+                setData(fakeData);
+            });
+    }, []);
     return (
         <section id="works" className="s-works">
             <div className="intro-wrap">
@@ -91,7 +90,7 @@ function ProjectRender({ link, title, image, description, docLink, caption }: Pr
                     <a href={link} target="_blank" className="thumb-link" title={title} data-size="1800x1800">
                         <img
                             /* eslint-disable */
-                            src={image!}
+                            src={image}
                             alt=""
                             height="auto"
                             width="100%"

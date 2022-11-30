@@ -1,5 +1,5 @@
-import React, { ReactNode, useLayoutEffect, useState } from "react";
-import { NavLink as RouterLink, matchPath, useLocation } from "react-router-dom";
+import { ReactNode, useEffect, useLayoutEffect, useState } from "react";
+import { NavLink as RouterLink, matchPath, useLocation, useMatch } from "react-router-dom";
 import { useTheme, alpha } from "@mui/material/styles";
 import { Box, List, Collapse, ListItemText, Typography, ListItemButtonProps } from "@mui/material";
 import $ from "jquery";
@@ -16,31 +16,8 @@ export default function NavSection({ navConfig, toggleSidebar, ...other }: NavSe
     const { pathname, hash } = useLocation();
 
     const match = (path: string) => (path ? !!matchPath({ path, end: false }, pathname) : false);
-    useLayoutEffect(() => {
-        // $(".smoothscroll").on("click", (e) => {
-        //     const $target = $(hash);
-        //     console.log(hash);
-        //     // e.preventDefault();
-        //     e.stopPropagation();
-        //     $("html, body")
-        //         .stop()
-        //         .animate(
-        //             {
-        //                 scrollTo: $target.offset()?.top,
-        //             },
-        //             800,
-        //             "swing"
-        //         )
-        //         .promise()
-        //         .done(() => {
-        //             toggleSidebar();
-        //             // window.location.hash = path;
-        //         })
-        //         .catch((e) => {
-        //             console.log(e);
-        //         });
-        // });
-    });
+    useLayoutEffect(() => {});
+    useEffect(() => {}, [pathname, hash]);
     return (
         <Box {...other}>
             {/* TODO */}
@@ -81,6 +58,7 @@ export default function NavSection({ navConfig, toggleSidebar, ...other }: NavSe
 }
 interface NavItemProps extends ListItemButtonProps {
     item: NavItemType;
+    // eslint-disable-next-line
     active: { (path: string): boolean };
     toggleSidebar: () => void;
 }
@@ -118,7 +96,7 @@ function scrollto0(e: Event, toggleSidebar: () => void) {
 function NavItem({ item, active, toggleSidebar, ...other }: NavItemProps) {
     const theme = useTheme();
     const { hash } = useLocation();
-    const isActiveRoot = active(item.path);
+    const isActiveRoot = !!useMatch(item.path);
 
     const { title, path, icon, info, children } = item;
 
@@ -144,7 +122,13 @@ function NavItem({ item, active, toggleSidebar, ...other }: NavItemProps) {
                     }}
                     component={isActiveRoot ? "div" : RouterLink}
                     to={isActiveRoot ? null : path}
-                    onClick={isActiveRoot ? (e: Event) => scrollto0(e, toggleSidebar) : null}
+                    onClick={
+                        isActiveRoot
+                            ? (e: Event) => scrollto0(e, toggleSidebar)
+                            : () => {
+                                  window.scrollTo(0, 0);
+                              }
+                    }
                     {...other}
                 >
                     <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
