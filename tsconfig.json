@@ -20,5 +20,5 @@
             "parallax": ["./node_modules/jquery-parallax.js/parallax.min.js"]
         }
     },
-    "include": ["src", "public/js", "public/static"]
+    "include": ["src", "public/static/js", "public/static"]
 }

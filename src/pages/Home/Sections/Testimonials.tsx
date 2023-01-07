@@ -1,61 +1,59 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
+import $ from "jquery";
+import axios from "axios";
 
-/* eslint-disable */
-const fakeData: TestimonialType[] = [
-    {
-        testimonial: `We started IDS to bring together all the students who want to make a change in ourenvironment. We encourage every student to join regardless of their faculty!`,
-        image: require("../../../static/images/avatars/person5.png"),
-        author: "Ashwin1",
-        role: "Leader",
-    },
-    {
-        testimonial: `We started IDS to bring together all the students who want to make a change in our
-    environment. We encourage every student to join regardless of their faculty!`,
-        image: require("../../../static/images/avatars/person5.png"),
-        author: "Ashwin2",
-        role: "Leader",
-    },
-    {
-        testimonial: `We started IDS to bring together all the students who want to make a change in our
-    environment. We encourage every student to join regardless of their faculty!,`,
-        image: require("../../../static/images/avatars/person5.png"),
-        author: "Ashwin3",
-        role: "Leader",
-    },
-];
+import { testimonials as initialData } from "./defaultData";
 
 export default function Testimonials() {
+    const [testimonials, setTestimonials] = useState<TestimonialType[]>([]);
     useLayoutEffect(() => {
-        $(".testimonials")
-            .not(".slick-initialized")
-            .slick({
-                arrows: true,
-                dots: false,
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                adaptiveHeight: true,
-                pauseOnFocus: false,
-                autoplaySpeed: 1500,
-                responsive: [
-                    {
-                        breakpoint: 900,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
+        if (testimonials.length > 0) {
+            $(".testimonials")
+                .not(".slick-initialized")
+                .slick({
+                    arrows: true,
+                    dots: false,
+                    infinite: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    adaptiveHeight: true,
+                    pauseOnFocus: false,
+                    autoplaySpeed: 1500,
+                    responsive: [
+                        {
+                            breakpoint: 900,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                            },
                         },
-                    },
-                    {
-                        breakpoint: 800,
-                        settings: {
-                            arrows: false,
-                            dots: true,
+                        {
+                            breakpoint: 800,
+                            settings: {
+                                arrows: false,
+                                dots: true,
+                            },
                         },
-                    },
-                ],
-            });
+                    ],
+                });
+        }
     });
-    const [testimonials, setTestimonials] = useState<TestimonialType[]>(fakeData);
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        setTestimonials(initialData); // remove when setup
+        // axios
+        //     .get<TestimonialType[]>("testimonial")
+        //     .then((res) => res.data)
+        //     .then((data) => {
+        //         setTestimonials(data);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+
+        //         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        //         setTestimonials(initialData);
+        //     });
+    }, []);
     return (
         <section id="testimonials" className="s-clients">
             <div className="row section-header" data-aos="fade-up">
@@ -78,7 +76,7 @@ export default function Testimonials() {
 }
 type TestimonialType = {
     testimonial: string;
-    image: string;
+    image: string | typeof import("*.png") | undefined;
     author: string;
     role: string;
 };
@@ -86,7 +84,7 @@ function Testimonial({ testimonial, image, author, role }: TestimonialType) {
     return (
         <div className="testimonials__slide">
             <p>{testimonial}</p>
-
+            {/* @ts-ignore */}
             <img src={image} alt="Testimonial Author" className="testimonials__avatar" />
             <div className="testimonials__info">
                 <span className="testimonials__name">{author}</span>

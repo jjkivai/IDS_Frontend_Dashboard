@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import List from "@mui/material/List";
 import $ from "jquery";
+// import "jquery-parallax.js";
 // Custom imports
 import SolarPanel from "../../../static/images/solarpanel.jpeg";
 import Iconify from "../../../components/Iconify";

@@ -3,58 +3,33 @@ import axios from "axios";
 // import * as Masonry from "masonry-layout";
 import "imagesloaded";
 // import * as Parallax from "jquery-parallax.js"
-
+import { projects as fakeData } from "./defaultData";
 /* eslint-disable */
 type Project = {
     title: string;
     link: string;
-    image: string;
+    image: string | typeof import("*.png") | undefined;
     docLink?: string;
     description: string;
     caption?: string;
 };
 
-const fakeData: Project[] = [
-    {
-        title: "Solar Bench Project",
-        link: "/solar_bench",
-        image: "../../../static/images/portfolio/gallery/solar_bench.png",
-        docLink:
-            "https://docs.google.com/presentation/d/1SNtXMcVFSYvDvYd1gbPlbcELS1MevdR-yTPqgnv6i48/edit#slide=id.g35f391192_00",
-        description: "Implementing Solar Benches on Campus",
-        caption: `IDS has realized that there is a lack of available renewable energy
-        resources for student use on the UBCO campus. As a result of this, IDS is
-        proposing the Solar Bench Project; the objective of this project is to
-        design and implement sustainable solar benches on campus which will act as
-        seating and charging stations.`,
-    },
-    {
-        title: "Campus Waste Initiaive",
-        link: "/cwi",
-        image: "../../../static/images/portfolio/gallery/cwi.png",
-        description: "Waste Management around University Campus",
-    },
-    {
-        title: "Solar Decathelon",
-        link: "https://www.solardecathlon.gov/",
-        image: "../../../static/images/portfolio/gallery/sd.jpg",
-        description: "The solar decathelon competition",
-    },
-];
-
 export default function Works() {
+    // const [data, setData] = useState<Project[]>([]);
     const [data, setData] = useState<Project[]>([]);
     useEffect(() => {
-        axios
-            .get<Project[]>("project")
-            .then((res) => res.data)
-            .then((data) => {
-                setData(data);
-            })
-            .catch((error) => {
-                console.error(error);
-                setData(fakeData);
-            });
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        setData(fakeData);
+        //     axios
+        //         .get<Project[]>("project")
+        //         .then((res) => res.data)
+        //         .then((data) => {
+        //             setData(data);
+        //         })
+        //         .catch((error) => {
+        //             console.error(error);
+        //             setData(fakeData);
+        //         });
     }, []);
     return (
         <section id="works" className="s-works">
@@ -89,7 +64,8 @@ function ProjectRender({ link, title, image, description, docLink, caption }: Pr
                 <div className="item-folio__thumb">
                     <a href={link} target="_blank" className="thumb-link" title={title} data-size="1800x1800">
                         <img
-                            /* eslint-disable */
+                            /* eslint-disable*/
+                            /* @ts-ignore */
                             src={image}
                             alt=""
                             height="auto"

@@ -31,15 +31,14 @@ export default function SolarBench() {
                         <h3>Goals</h3>
 
                         <p>
-                            <a href="#">
-                                <img
-                                    width="120"
-                                    height="120"
-                                    className="pull-left"
-                                    alt="Solar Bench"
-                                    src="images/solar_bench.png"
-                                />
-                            </a>
+                            <img
+                                width="120"
+                                height="120"
+                                className="pull-left"
+                                alt="Solar Bench"
+                                /* eslint-disable */
+                                src={require("../../static/images/portfolio/gallery/solar_bench.png")}
+                            />
                             The basic deliverables of this project include an off-grid solar panel system design, a
                             bench with structural integrity, and an overall structure that follows UBCO guidelines and
                             policies. The benches must be able to charge electronic devices (laptops, phones, etc.)

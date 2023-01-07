@@ -16,16 +16,16 @@ export default function About() {
     const [hasCounted, sethasCounted] = useState(false);
     const [data, setData] = useState<AboutData>(fakeData);
     useEffect(() => {
-        axios
-            .get<AboutData[]>("about")
-            .then((res) => res.data)
-            .then((data) => {
-                setData(data[0]);
-            })
-            .catch((err) => {
-                console.log(err);
-                setData(fakeData);
-            });
+        // axios
+        //     .get<AboutData[]>("about")
+        //     .then((res) => res.data)
+        //     .then((data) => {
+        //         setData(data[0]);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //         setData(fakeData);
+        //     });
     }, []);
     // use this unless other counts are needed
     // eslint-disable-next-line

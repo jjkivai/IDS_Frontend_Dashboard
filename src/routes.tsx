@@ -1,6 +1,6 @@
 import { useRoutes } from "react-router-dom";
 import { MainLayout } from "./components/Layouts";
-import { Home, SolarBench } from "./pages";
+import { Cwi, Dashboard, Home, SolarBench } from "./pages";
 
 export default function Router() {
     return useRoutes([
@@ -15,6 +15,14 @@ export default function Router() {
                 {
                     path: "solar_bench",
                     element: <SolarBench />,
+                },
+                {
+                    path: "campus_waste_initiative",
+                    element: <Cwi />,
+                },
+                {
+                    path: "solar_bench/dashboard",
+                    element: <Dashboard />,
                 },
             ],
         },

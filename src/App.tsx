@@ -11,7 +11,9 @@ import Router from "./routes";
 // Global application css
 import "./App.css";
 import ThemeProvider from "./Theme";
-// Paralla
+// Parallax
+// import "jquery-parallax.js";
+
 declare global {
     // eslint-disable-next-line
     interface Window {
@@ -29,6 +31,10 @@ function App() {
     const preLoaderRef = useRef(null);
     // Initialize stuff app will require
     useEffect(() => {
+        $(() => {
+            /* @ts-ignore-next-line */
+            import("jquery-parallax.js");
+        });
         if (isLoading) {
             setLoader();
             /** TODO: SET UP A PROPER FUNCTION TO REMOVE LOADING */
@@ -49,7 +55,6 @@ function App() {
             delay: 300,
             once: true,
         });
-        // window["jQuery"] = $;
     }, []);
     return isLoading ? (
         <PreLoader loaderRef={loaderRef} preLoaderRef={preLoaderRef} />
@@ -58,8 +63,8 @@ function App() {
             <Helmet>
                 {/* <script src="/js/parallax.min.js" async />
                 <script src="/js/waypoints.min.js" async /> */}
-                <script src="/js/libraries.js" />
-                <script src="/js/external.js" />
+                <script src="static/js/libraries.js" type="application/js" />
+                <script src="static/js/external.js" type="application/js" />
             </Helmet>
             <Router />
         </ThemeProvider>

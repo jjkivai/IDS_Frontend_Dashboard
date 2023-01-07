@@ -1,29 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import $ from "jquery";
 import axios from "axios";
-/* eslint-disable */
-const initialData: Member[] = [
-    {
-        name: "Sayra Gorgani",
-        position: "Founder",
-        image: require("../../../static/images/avatars/person5.png"),
-    },
-    {
-        name: "Ashwin Ramesh",
-        position: "Co-Founder",
-        image: require("../../../static/images/avatars/person7.png"),
-    },
-    {
-        name: "Eric Laksmono",
-        position: "Co-Founder",
-        image: require("../../../static/images/avatars/person5.png"),
-    },
-    {
-        name: "Alexis Guidi",
-        position: "Co-Founder",
-        image: require("../../../static/images/avatars/person3.png"),
-    },
-];
+
+import { teamMembers as initialData } from "./defaultData";
+
 export default function Team() {
     const [members, setMembers] = useState<Member[]>([]);
     useLayoutEffect(() => {
@@ -59,17 +39,20 @@ export default function Team() {
         }
     });
     useEffect(() => {
-        axios
-            .get<Member[]>("people")
-            .then((res) => res.data)
-            .then((data) => {
-                setMembers(data);
-            })
-            .catch((error) => {
-                console.error(error);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        setMembers(initialData); // REMOVE
+        // axios
+        //     .get<Member[]>("people")
+        //     .then((res) => res.data)
+        //     .then((data) => {
+        //         setMembers(data);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
 
-                setMembers(initialData);
-            });
+        //         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        //         setMembers(initialData);
+        //     });
     }, []);
     return (
         <section id="team" className="s-clients">
@@ -93,13 +76,14 @@ export default function Team() {
     );
 }
 type Member = {
-    image: string;
+    image: string | typeof import("*.png") | undefined;
     name: string;
     position: string;
 };
 function Member({ image, name, position }: Member) {
     return (
         <div className="team__slide">
+            {/* @ts-ignore */}
             <img src={image} alt="Author" className="team__avatar" />
             <div className="team__info">
                 <span className="team__name">{name}</span>

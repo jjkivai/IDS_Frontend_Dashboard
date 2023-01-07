@@ -48,7 +48,7 @@ const navRoutes = [
         children: [
             {
                 title: "dashboard",
-                path: "/dashboard",
+                path: "dashboard",
                 icon: getIcon("eva:pie-chart-2-fill"),
             },
         ],
